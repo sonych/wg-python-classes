@@ -1,0 +1,11 @@
+*.*~
+*.log
+*.pot
+*.pyc
+*.py~
+*.sublime-project
+*.sublime-workspace
+*.sqlite
+.idea
+.idea/*
+*.pyc
