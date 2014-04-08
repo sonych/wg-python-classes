@@ -9,19 +9,19 @@ class ForthException(Exception):
 class Forth(object):
 
     def __init__(self, statements):
-        self._stack = []
-        self._statements = statements
-        self._current_statement = None
+        self.stack = []   # _ not for this case
+        self.statements = statements
+        self.current_statement = None
 
     def put(self):
-        val = self._current_statement.split()[1]
-        self._stack.append(eval(val))
+        val = self._current_statement.split()[1] # put "I will kill you interpreter"
+        self._stack.append(eval(val))  # you need to remove ''"" from string values
 
     def pop(self):
         self._stack.pop()
 
     def add(self):
-        a, b = self._stack.pop(), self._stack.pop()
+        a, b = self._stack.pop(), self._stack.pop() # are you sure about tuple items evaluation order?
         self._stack.append(a+b)
 
     def sub(self):
@@ -29,19 +29,19 @@ class Forth(object):
         self._stack.append(a-b)
 
     def print_(self):
-        return self._stack.pop()
+        print self._stack.pop()
 
     def run(self):
         for s in self._statements:
             if hasattr(self, s.split()[0]):
-                method = getattr(self, s.split()[0])
-                self._current_statement = s
-                method()
+                method = getattr(self, s.split()[0])  # what is "run 1" would be in frt file?
+                self._current_statement = s  # ugly way of passing parameter to method()
+                method() # << method(s)
             elif s.startswith('print'):
                 # special hack for 'print' statement
                 print self.print_()
             else:
-                raise ForthException('Syntax error')
+                raise ForthException('Syntax error') # in this case should also be used for stack
 
 
 def eval_forth(file_name):
@@ -51,12 +51,11 @@ def eval_forth(file_name):
     source_code = map(lambda x: x.strip(), source_code)
     source_code = filter(lambda x: x if x[0]!='#' else False, source_code)
 
-    forth = Forth(source_code)
-    forth.run()
+    Forth(source_code).run() # this isn't a class :)
 
 
 def main():
-    eval_forth('example.frt')
+    eval_forth('example.frt') # should get file name from command line
 
 
 if __name__ == '__main__':
