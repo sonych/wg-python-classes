@@ -8,7 +8,7 @@ import time
 
 def map_rq(func, sequence):
     if sequence:
-        return [func(sequence[0])] + map_rq(func, sequence[1:])
+        return [func(sequence[0])] + map_rq(func, sequence[1:]) #<<<< would not works with generators
     else:
         return []
 
@@ -24,6 +24,10 @@ def map_rq_yield(func, sequence):
     else:
         yield []
 
+#In [17]: for i in map_rq_yield(str, range(10)):
+#   ....:     print i
+#   ....:     
+#['0', ['1', ['2', ['3', ['4', ['5', ['6', ['7', ['8', ['9', []]]]]]]]]]]
 
 # Task 2
 # Profiling decorator
@@ -35,7 +39,7 @@ def time_me(time_func, statistic):
     def decorator(func):
         def wrapper(*args, **kwargs):
             t1 = time_func()
-            func(*args, **kwargs)
+            func(*args, **kwargs)  # <<< function result is ommited
             t2 = time_func()
             statistic['cum_time'] += t2 - t1
             statistic['num_calls'] += 1
