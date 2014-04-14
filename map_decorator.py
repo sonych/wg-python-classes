@@ -18,15 +18,8 @@ def map_yield(func, sequence):
         yield func(item)
 
 
-# TODO: don't work, fix it
 # def map_rq_yield(func, sequence):
-#     result = []
-#     if sequence:
-#         result.append(func(sequence[0]))
-#         result.extend(map_rq_yield(func, sequence[1:]))
-#         yield result
-#     else:
-#         yield []
+#     pass
 
 
 # Task 2
