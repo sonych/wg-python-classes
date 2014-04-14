@@ -18,8 +18,11 @@ def map_yield(func, sequence):
         yield func(item)
 
 
-# def map_rq_yield(func, sequence):
-#     pass
+def map_rq_yield(func, sequence):
+    if sequence:
+        yield [func(sequence[0])] + list(map_rq_yield(func, sequence[1:]))
+    else:
+        yield []
 
 
 # Task 2
