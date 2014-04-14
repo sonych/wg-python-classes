@@ -26,7 +26,7 @@ def map_rq_yield(func, sequence):
 
 #In [17]: for i in map_rq_yield(str, range(10)):
 #   ....:     print i
-#   ....:     
+#   ....:
 #['0', ['1', ['2', ['3', ['4', ['5', ['6', ['7', ['8', ['9', []]]]]]]]]]]
 
 # Task 2
@@ -39,7 +39,7 @@ def time_me(time_func, statistic):
     def decorator(func):
         def wrapper(*args, **kwargs):
             t1 = time_func()
-            func(*args, **kwargs)  # <<< function result is ommited
+            return func(*args, **kwargs)
             t2 = time_func()
             statistic['cum_time'] += t2 - t1
             statistic['num_calls'] += 1
