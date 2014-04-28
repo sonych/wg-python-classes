@@ -16,8 +16,7 @@ class RPCServer(object):
         self.procedures[func.func_name] = func
 
     def unregister(self, name):
-        if name in self.procedures:
-            del self.procedures[name]
+        del self.procedures[name]   # don't suppress error
 
     def serve_forever(self):
         while True:
@@ -55,7 +54,7 @@ class RPCClient(object):
             self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.socket.connect(('localhost', 5448))
             self.socket.sendall(data)
-            result = cPickle.loads(self.socket.recv(4096))
+            result = cPickle.loads(self.socket.recv(4096)) # <<< c.some_call("hello" * 10000)
             self.socket.close()
 
             return result
