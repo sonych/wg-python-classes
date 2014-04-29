@@ -24,7 +24,7 @@ def args_type_ckecker(*checker_args):
 
 
 
-class ArgsTypeChecker(unittest.TestCase):
+class ArgsTypeCheckerTest(unittest.TestCase):
 
     def setUp(self):
         @args_type_ckecker(int, int, str)
