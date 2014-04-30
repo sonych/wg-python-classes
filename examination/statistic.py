@@ -8,9 +8,6 @@ def statistic(file):
     for i, line in enumerate(file, 1):
 
         if line.strip():
-            if i == 1:
-                average_line_length = len(line)
-            else:
-                average_line_length = (average_line_length + len(line)) / 2.
+            average_line_length += len(line)
 
-            yield i, int(average_line_length), line
+            yield i, average_line_length/i, line
