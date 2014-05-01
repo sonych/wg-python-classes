@@ -23,6 +23,7 @@ def parse_request(request_str):
 
     request = HttpRequest(d['method'], d['url'], d['http_version'])
 
+    # здесь лучше пройтись по каждой строке по-отдельности, иначе невалидные строки пройдут мимо нас
     headers = dict(re.findall(r"\s*(?P<name>.*?)\s*:\s*(?P<value>.*?)\s*\n", raw_heaers))
     request.headers = headers
 
