@@ -12,8 +12,10 @@ def args_type_ckecker(*checker_args):
             if len(checker_args) != len(func_args):
                 raise TypeError('Incorrect arguments number. Expected {}, given - {} arguments'.format(len(checker_args), len(func_args)))
 
+            # for arg, tp in zip(func_args, checker_args):
             for i,arg in enumerate(func_args):
-                if type(arg) is not checker_args[i]:
+                
+                if isinstance(arg, checker_args[i]):
                     raise TypeError('Incorrect argument type in {} position. Expected "{}", but get "{}"'.format(i+1, checker_args[i].__name__, type(arg).__name__))
 
             return func(*func_args)
